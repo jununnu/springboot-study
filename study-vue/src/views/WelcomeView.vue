@@ -10,14 +10,21 @@
             <div style="margin-top: 10px">Java/JavaScript/Python</div>
         </div>
         
-        <div style="width: 400px; background-color: white">
-            <router-view/>
+        <div style="width: 400px; background-color: white; z-index: 1">
+            <transition name="el-fade-in-linear">
+                <router-view v-slot="{ Component }">
+                    <transition name="el-fade-in-linear">
+                        <component :is="Component" />
+                    </transition>
+                </router-view>
+            </transition>
         </div>
     </div>
 </template>
 
 <script setup>
 import router from "../router/index.js";
+
 </script>
 
 <style scoped>
