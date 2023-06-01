@@ -21,7 +21,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item prob="password_repeat">
-                    <el-input type="password" name="password_repeat" v-model="form.password_repeat" placeholder="重复密码" @click="abc" >
+                    <el-input type="password" v-model="form.password_repeat" placeholder="重复密码" >
                         <template #prefix>
                             <el-icon><Lock /></el-icon>
                         </template>
@@ -116,7 +116,6 @@ const form = reactive({
     code: ''
 })
 
-const abc = () => {console.info(form.password_repeat)}
 </script>
 
 
