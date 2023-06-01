@@ -21,7 +21,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item prob="password_repeat">
-                    <el-input type="password" v-model="form.password_repeat" placeholder="重复密码" >
+                    <el-input type="password" name="password_repeat" v-model="form.password_repeat" placeholder="重复密码" @click="abc" >
                         <template #prefix>
                             <el-icon><Lock /></el-icon>
                         </template>
@@ -83,16 +83,28 @@ const validateUsername = (rule, value, callback) => {
     }
 }
 
+const validatePassword = (rule, value, callback) => {
+    if (value === '') {
+        callback(new Error('请再次输入密码'))
+    } else if (value !== form.password) {
+        callback(new Error('两次输入的密码不一致'))
+    } else {
+        callback()
+    }
+}
+
 const rules = {
     username: [
         { validator: validateUsername, trigger: ['blur', 'change']},
         { min: 2, max: 8, message: '用户名长度范围为2-8个字符', trigger: ['blur', 'change']}
     ],
     password: [
+        { required: true, message: '请输入密码', trigger: 'blur'},
         { min: 6, max: 16, message: '密码长度范围为6-16个字符', trigger: ['blur', 'change']}
     ],
     password_repeat: [
-        { min: 6, max: 16, message: '密码长度范围为6-16个字符', trigger: ['blur', 'change']}
+        { required: true, message: '123' },
+        { validator: validatePassword, trigger: ['blur', 'change'] }
     ]
 }
 
@@ -103,6 +115,8 @@ const form = reactive({
     email: '',
     code: ''
 })
+
+const abc = () => {console.info(form.password_repeat)}
 </script>
 
 
